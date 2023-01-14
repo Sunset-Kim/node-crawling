@@ -1,14 +1,15 @@
 import { CheerioAPI } from "cheerio";
-import { CafeMenu } from "../types/cafemunu.type";
-import { SiteInfo } from "../types/siteInfo.type";
-import debug from "../utils/debug";
+import { CafeMenu } from "../../types/cafemunu.type";
+import { SiteInfo } from "../../types/siteInfo.type";
+import debug from "../../utils/debug";
 
 const log = debug("스타벅스 |");
 
 export const starbucks: SiteInfo = {
+  type: "default",
   site_name: "스타벅스",
   url: "https://www.starbucks.co.kr/menu/drink_list.do",
-  fliter: ($: CheerioAPI) => {
+  filter: ($: CheerioAPI) => {
     const array: CafeMenu[] = [];
 
     $(".menuDataSet dl").each((i, el) => {

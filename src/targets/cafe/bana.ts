@@ -1,14 +1,15 @@
 import { CheerioAPI } from "cheerio";
-import { CafeMenu } from "../types/cafemunu.type";
-import { SiteInfo } from "../types/siteInfo.type";
-import debug from "../utils/debug";
+import { CafeMenu } from "../../types/cafemunu.type";
+import { SiteInfo } from "../../types/siteInfo.type";
+import debug from "../../utils/debug";
 
 const log = debug("바나프레소 |");
 
 export const 바나프레소: SiteInfo = {
+  type: "default",
   site_name: "바나프레소",
   url: "https://banapresso.com/menu",
-  fliter($: CheerioAPI) {
+  filter($: CheerioAPI) {
     const arr: CafeMenu[] = [];
 
     $(".menu_box").each((i, el) => {

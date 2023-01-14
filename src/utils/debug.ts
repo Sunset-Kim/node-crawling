@@ -5,7 +5,12 @@ function getRandomColor() {
 }
 
 export default function debug(keyword: string) {
-  return function log(message: string) {
-    console.log(`\x1b[1m${getRandomColor()}%s`, keyword, message);
+  return function log(message: any) {
+    try {
+      const print = typeof message === "string" ? message : JSON.stringify(message);
+      return console.log(`\x1b[1m${getRandomColor()}%s`, keyword, print);
+    } catch (error) {
+      console.log(`\x1b[1m${getRandomColor()}%s`, "error: JSON.stringify in debug");
+    }
   };
 }

@@ -1,8 +1,8 @@
 import puppeteer from "puppeteer";
 import cheerio, { CheerioAPI } from "cheerio";
 import debug from "./utils/debug";
-import { starbucks } from "./targets/starbucks";
-import { 바나프레소 } from "./targets/bana";
+import { starbucks } from "./targets/cafe/starbucks";
+import { 바나프레소 } from "./targets/cafe/bana";
 const fs = require("fs");
 
 const log = debug("index");
@@ -20,7 +20,7 @@ const targets = [starbucks, 바나프레소];
     });
 
     const $ = cheerio.load(await page.content());
-    const array = item.fliter($);
+    const array = item.filter($);
     fs.writeFileSync(`data/${item.site_name}.json`, JSON.stringify(array));
   }
 
