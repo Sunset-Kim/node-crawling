@@ -1,13 +1,13 @@
 import puppeteer from "puppeteer";
-import cheerio, { CheerioAPI } from "cheerio";
+import cheerio from "cheerio";
 import debug from "./utils/debug";
-import { starbucks } from "./targets/cafe/starbucks";
-import { 바나프레소 } from "./targets/cafe/bana";
+import { kream_옷 } from "./targets/shopping/kream";
+import { kream_신발 } from "./targets/shopping/kream_shoes";
 const fs = require("fs");
 
 const log = debug("index");
 
-const targets = [starbucks, 바나프레소];
+const targets = [kream_신발, kream_옷];
 
 (async () => {
   log("스크래핑 시작");
@@ -21,6 +21,7 @@ const targets = [starbucks, 바나프레소];
 
     const $ = cheerio.load(await page.content());
     const array = item.filter($);
+
     fs.writeFileSync(`data/${item.site_name}.json`, JSON.stringify(array));
   }
 

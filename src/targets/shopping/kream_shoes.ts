@@ -1,6 +1,7 @@
 import { CheerioAPI } from "cheerio";
 import { SiteInfo } from "../../types/siteInfo.type";
 import debug from "../../utils/debug";
+import { v4 as uuidv4 } from "uuid";
 
 const log = debug("크림신발 | ");
 
@@ -16,11 +17,15 @@ export const kream_신발: SiteInfo = {
         const image = $(el).find(".product .picture.product_img .image").attr("src") || "";
         const brand = $(el).find(".product_info_area .title .product_info_brand.brand").text().trim();
         const name = $(el).find(".product_info_area .product_info_product_name .translated_name").text();
+        const category = "shoes";
+        const id = uuidv4();
 
-        const item = { image, brand, name };
+        const item = { id, image, brand, name, category };
         log(item);
-        arr.push({ image, brand, name });
+        arr.push(item);
       });
+
+      log(arr);
       return arr;
     } catch (error) {}
   },
